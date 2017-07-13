@@ -1,0 +1,28 @@
+<p> Ingrese un telefono </p>
+<p-inputMask [(ngModel)]="telefono" mask="999-9999999"></p-inputMask>
+<p> Telefono a registrar es: {{ telefono }} </p>
+
+<h1 [hidden]="tituloOculto">Titulo</h1>
+<button [disabled]="botonDeshabilitado" (click)="ocultarTitulo()">{{ tituloOculto == true ? 'Mostrar Titulo': 'Ocultar Titulo' }}</button>
+<button (click)="deshabilitarOcultar()">Deshabilitar Ocultar</button>
+
+<div *ngIf="tituloOculto">
+  <p> El titulo ha desaparecido ! </p>
+</div>
+
+<input type="text" #producto>
+<button (click)="buscar(producto.value)">Buscar</button>
+<p-dataTable [value]="productos">
+    <p-column field="title" header="Descripcion" [sortable]="true"></p-column>
+    <p-column field="price" header="Precio" [sortable]="true">
+       <ng-template let-col let-producto="rowData" pTemplate="body">
+            {{ producto.price | currency:'COP':true }}
+        </ng-template>
+    </p-column>
+    <p-column field="thumbnail" header="Imagen">
+       <ng-template let-col let-producto="rowData" pTemplate="body">
+            <img [src]="producto.thumbnail">
+        </ng-template>
+    </p-column>
+</p-dataTable>
+
